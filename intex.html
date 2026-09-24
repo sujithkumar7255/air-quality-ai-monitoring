@@ -1,0 +1,753 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Intelligent Air Quality Monitoring</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f4f8fb;
+    color:#222;
+}
+
+/* NAVBAR */
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#0b3954;
+    padding:15px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+nav ul li a{
+    color:white;
+    text-decoration:none;
+    font-size:15px;
+}
+
+nav ul li a:hover{
+    color:#53d8fb;
+}
+
+/* HERO */
+.hero{
+    min-height:90vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px 10%;
+    background:linear-gradient(135deg,#0b3954,#087e8b,#00a896);
+    color:white;
+}
+
+.hero h1{
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:20px;
+    max-width:800px;
+    margin:auto;
+    line-height:1.7;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:13px 28px;
+    background:white;
+    color:#087e8b;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:bold;
+}
+
+/* COMMON */
+section{
+    padding:70px 8%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.section-title h2{
+    font-size:32px;
+    color:#0b3954;
+}
+
+.section-title p{
+    margin-top:10px;
+    color:#666;
+}
+
+/* CARDS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    padding:28px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+}
+
+.card h3{
+    color:#087e8b;
+    margin-bottom:12px;
+}
+
+.card p{
+    line-height:1.6;
+    color:#555;
+}
+
+/* AQI DASHBOARD */
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.aqi-card{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.aqi-number{
+    font-size:42px;
+    font-weight:bold;
+    color:#00a896;
+    margin:10px;
+}
+
+.pollutant{
+    font-size:30px;
+    font-weight:bold;
+    color:#0b3954;
+}
+
+/* TABLE */
+.table-container{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+th,td{
+    padding:15px;
+    border:1px solid #ddd;
+    text-align:left;
+}
+
+th{
+    background:#0b3954;
+    color:white;
+}
+
+/* FLOW */
+.flow{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+}
+
+.flow-box{
+    background:#087e8b;
+    color:white;
+    padding:18px 25px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.arrow{
+    font-size:25px;
+    color:#0b3954;
+}
+
+/* TEAM */
+.team{
+    text-align:center;
+}
+
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    margin-top:30px;
+}
+
+.member{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.member h3{
+    color:#087e8b;
+}
+
+/* FOOTER */
+footer{
+    background:#0b3954;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+@media(max-width:700px){
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav ul{
+        gap:12px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero h1{
+        font-size:35px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="logo">AirQuality AI</div>
+
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#dashboard">AQI</a></li>
+        <li><a href="#modules">Modules</a></li>
+        <li><a href="#algorithm">Algorithm</a></li>
+        <li><a href="#team">Team</a></li>
+    </ul>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div>
+        <h1>Intelligent Visual Analytics for Monitoring Air Quality with AI</h1>
+
+        <p>
+            An AI and Machine Learning based system for analysing
+            historical air quality data and predicting Air Quality Index (AQI)
+            for different locations.
+        </p>
+
+        <a href="#dashboard" class="btn">View AQI Dashboard</a>
+    </div>
+</section>
+
+
+<!-- ABOUT -->
+<section id="about">
+
+    <div class="section-title">
+        <h2>About The Project</h2>
+        <p>AI-based Air Quality Prediction and Analysis</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>🎯 Objective</h3>
+            <p>
+                To analyse air pollution and predict the Air Quality Index
+                using historical pollutant data and machine learning.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📊 AQI Analysis</h3>
+            <p>
+                The system calculates pollutant indices and determines
+                AQI using the maximum sub-index approach.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🤖 Machine Learning</h3>
+            <p>
+                Machine learning techniques are used to predict air quality
+                values and classify air quality categories.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🌍 Environmental Monitoring</h3>
+            <p>
+                The system can support pollution monitoring and improve
+                awareness and preparedness.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- AQI DASHBOARD -->
+<section id="dashboard">
+
+    <div class="section-title">
+        <h2>Air Quality Dashboard</h2>
+        <p>Sample pollutant monitoring data</p>
+    </div>
+
+    <div class="dashboard">
+
+        <div class="aqi-card">
+            <h3>Overall AQI</h3>
+            <div class="aqi-number" id="aqi">126</div>
+            <p>Moderate</p>
+        </div>
+
+        <div class="aqi-card">
+            <h3>PM2.5</h3>
+            <div class="pollutant">68</div>
+            <p>µg/m³</p>
+        </div>
+
+        <div class="aqi-card">
+            <h3>PM10</h3>
+            <div class="pollutant">112</div>
+            <p>µg/m³</p>
+        </div>
+
+        <div class="aqi-card">
+            <h3>NO₂</h3>
+            <div class="pollutant">42</div>
+            <p>µg/m³</p>
+        </div>
+
+        <div class="aqi-card">
+            <h3>SO₂</h3>
+            <div class="pollutant">31</div>
+            <p>µg/m³</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- POLLUTANTS -->
+<section>
+
+    <div class="section-title">
+        <h2>Pollutants Considered</h2>
+        <p>Important air-quality parameters used in analysis</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>PM2.5</h3>
+            <p>Fine particulate matter that can affect air quality.</p>
+        </div>
+
+        <div class="card">
+            <h3>PM10</h3>
+            <p>Particulate matter used for air pollution assessment.</p>
+        </div>
+
+        <div class="card">
+            <h3>NO₂ / NOx</h3>
+            <p>Nitrogen-based pollutants considered in AQI analysis.</p>
+        </div>
+
+        <div class="card">
+            <h3>SO₂</h3>
+            <p>Sulphur dioxide concentration used for AQI calculation.</p>
+        </div>
+
+        <div class="card">
+            <h3>NH₃</h3>
+            <p>Ammonia is another pollutant considered in the project.</p>
+        </div>
+
+        <div class="card">
+            <h3>VOC</h3>
+            <p>Volatile organic compounds can contribute to air pollution.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MODULES -->
+<section id="modules">
+
+    <div class="section-title">
+        <h2>System Modules</h2>
+        <p>Major components of the proposed system</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>01. Data Collection</h3>
+            <p>
+                Collects historical air quality data including pollutant,
+                location, date and monitoring station information.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>02. Pre-Processing</h3>
+            <p>
+                Handles missing values, invalid values and outliers
+                before machine learning analysis.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>03. AQI Calculation</h3>
+            <p>
+                Calculates individual pollutant indices and determines
+                the overall AQI.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>04. Model Training</h3>
+            <p>
+                Training and testing datasets are used to build
+                machine learning models.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>05. AQI Prediction</h3>
+            <p>
+                Predicts AQI values and air quality categories using
+                machine learning.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>06. Testing</h3>
+            <p>
+                Tests functions using valid and invalid inputs to
+                verify system reliability.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SYSTEM FLOW -->
+<section>
+
+    <div class="section-title">
+        <h2>System Workflow</h2>
+        <p>Air quality prediction process</p>
+    </div>
+
+    <div class="flow">
+
+        <div class="flow-box">Air Quality Data</div>
+        <div class="arrow">→</div>
+
+        <div class="flow-box">Pre-Processing</div>
+        <div class="arrow">→</div>
+
+        <div class="flow-box">AQI Calculation</div>
+        <div class="arrow">→</div>
+
+        <div class="flow-box">ML Model</div>
+        <div class="arrow">→</div>
+
+        <div class="flow-box">AQI Prediction</div>
+
+    </div>
+
+</section>
+
+
+<!-- ALGORITHM -->
+<section id="algorithm">
+
+    <div class="section-title">
+        <h2>Decision Tree Algorithm</h2>
+        <p>Machine learning approach used in the project</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Root Node</h3>
+            <p>
+                Represents the complete dataset used for the prediction.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Decision Nodes</h3>
+            <p>
+                Represent tests or decisions based on selected features.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Leaf Nodes</h3>
+            <p>
+                Represent the final prediction or output category.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LITERATURE -->
+<section>
+
+    <div class="section-title">
+        <h2>Literature Survey</h2>
+        <p>Selected research approaches</p>
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <tr>
+                <th>Research</th>
+                <th>Algorithm</th>
+                <th>Year</th>
+                <th>Limitation</th>
+            </tr>
+
+            <tr>
+                <td>Hybrid AQI Prediction Model</td>
+                <td>CNN + Attention Gate</td>
+                <td>2022</td>
+                <td>Requires tuning for different datasets</td>
+            </tr>
+
+            <tr>
+                <td>Air Quality Prediction</td>
+                <td>SVD</td>
+                <td>2024</td>
+                <td>Higher complexity</td>
+            </tr>
+
+            <tr>
+                <td>Feature Exploration AQI Prediction</td>
+                <td>LightGBM</td>
+                <td>2020</td>
+                <td>Feature engineering complexity</td>
+            </tr>
+
+            <tr>
+                <td>Air Quality Prediction</td>
+                <td>PSO + BP Neural Network</td>
+                <td>2020</td>
+                <td>Parameter tuning required</td>
+            </tr>
+
+            <tr>
+                <td>Future Air Quality Prediction</td>
+                <td>LSTM</td>
+                <td>2024</td>
+                <td>Higher computational requirements</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- TECHNOLOGY -->
+<section>
+
+    <div class="section-title">
+        <h2>Technology Stack</h2>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Python</h3>
+            <p>Used for data processing and machine learning implementation.</p>
+        </div>
+
+        <div class="card">
+            <h3>NumPy</h3>
+            <p>Used for numerical data processing.</p>
+        </div>
+
+        <div class="card">
+            <h3>Pandas</h3>
+            <p>Used for dataset manipulation and analysis.</p>
+        </div>
+
+        <div class="card">
+            <h3>Matplotlib</h3>
+            <p>Used for data visualization.</p>
+        </div>
+
+        <div class="card">
+            <h3>Scikit-learn</h3>
+            <p>Used for machine learning model implementation.</p>
+        </div>
+
+        <div class="card">
+            <h3>HTML / CSS / JavaScript</h3>
+            <p>Used to create this project visualization website.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TEAM -->
+<section id="team" class="team">
+
+    <div class="section-title">
+        <h2>Project Team</h2>
+        <p>The Kavery Engineering College, Mecheri, Salem</p>
+    </div>
+
+    <div class="team-grid">
+
+        <div class="member">
+            <h3>Sujith S</h3>
+            <p>612722104156</p>
+        </div>
+
+        <div class="member">
+            <h3>Sujith Kumar V</h3>
+            <p>612722104158</p>
+        </div>
+
+        <div class="member">
+            <h3>Swaraj S</h3>
+            <p>612722104162</p>
+        </div>
+
+        <div class="member">
+            <h3>Sethupathy D</h3>
+            <p>612722104146</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <h3>Intelligent Visual Analytics for Monitoring Air Quality with AI</h3>
+
+    <p style="margin-top:10px;">
+        AI • Machine Learning • Air Quality Prediction
+    </p>
+
+    <p style="margin-top:15px;">
+        © 2026 Project Team
+    </p>
+
+</footer>
+
+
+<script>
+
+/* SIMPLE AQI DEMO */
+
+let aqi = 126;
+
+const aqiElement = document.getElementById("aqi");
+
+function updateAQI(){
+
+    aqi += Math.floor(Math.random() * 11) - 5;
+
+    if(aqi < 50){
+        aqiElement.style.color = "green";
+    }
+    else if(aqi < 100){
+        aqiElement.style.color = "orange";
+    }
+    else if(aqi < 200){
+        aqiElement.style.color = "red";
+    }
+    else{
+        aqiElement.style.color = "purple";
+    }
+
+    aqiElement.innerText = aqi;
+}
+
+setInterval(updateAQI,3000);
+
+</script>
+
+</body>
+</html>
+```
